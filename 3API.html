@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interstellar Journey Hub</title>
+    <link rel="stylesheet" href="3API.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Interstellar Journey Hub</h1>
+        <p>Connect with the Cosmos using NASA's Astronomy Picture of the Day API</p>
+    </header>
+    
+    <div id="container">
+        <img id="image" src="" alt="Astronomy Picture of the Day" height="550">
+        <h2 id="title"></h2>
+        <p id="explanation"></p>
+        <p id="date"></p>
+    </div>
+
+    <footer>
+        &copy; 2023 Interstellar Journey Hub
+    </footer>
+
+    <script>
+        fetch('https://api.nasa.gov/planetary/apod?api_key=cPL0F9rDsgcjRCgZdXMNgkbk4hs2jcvyKtYCGdEN') 
+        // <!--initiates network request to specified URL-->
+            .then(response => response.json())
+            //<!-- message from API is typically in JSON format so this sets a promise chain-->
+            .then(data => {
+                document.getElementById('image').src = data.hdurl;
+                document.getElementById('title').textContent = data.title;
+                document.getElementById('explanation').textContent = data.explanation;
+                document.getElementById('date').textContent = 'Date: ' + data.date;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
